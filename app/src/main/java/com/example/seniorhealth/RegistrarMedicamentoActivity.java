@@ -101,8 +101,9 @@ public class RegistrarMedicamentoActivity extends AppCompatActivity {
                 medicamento.setDuracaoEmDias(duracaoEditText.getText().toString());
                 medicamento.setIntervaloEmHoras(intervaloEditText.getText().toString());
 
+                DataHolder.insere(medicamento);
+
                 Intent intent = new Intent(RegistrarMedicamentoActivity.this, ListarMedicamentosActivity.class);
-                intent.putExtra("NOVO_MEDICAMENTO", (CharSequence) medicamento);
                 startActivity(intent);
             }
         });
