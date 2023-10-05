@@ -12,6 +12,12 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.button.MaterialButton;
 
+import java.util.ArrayList;
+import java.util.List;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 /*
 import android.content.Intent;
 import android.os.Bundle;
@@ -67,6 +73,8 @@ public class RegistrarMedicamentoActivity extends AppCompatActivity {
 */
 public class RegistrarMedicamentoActivity extends AppCompatActivity {
 
+    private List<Medicamento> listaMedicamentos = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,24 +92,35 @@ public class RegistrarMedicamentoActivity extends AppCompatActivity {
             }
         });
 
+        EditText nomeEditText = findViewById(R.id.nomeEditText);
+        EditText duracaoEditText = findViewById(R.id.duracaoEditText);
+        EditText intervaloEditText = findViewById(R.id.intervaloEditText);
+        EditText dosagemEditText = findViewById(R.id.dosagemEditText);
+
         DatePicker dataInicial = findViewById(R.id.dataInicial);
         TimePicker horaInicial = findViewById(R.id.horaInicial);
         MaterialButton addButton = findViewById(R.id.addButton);
 
-        EditText nomeEditText = findViewById(R.id.nomeEditText);
-        EditText duracaoEditText = findViewById(R.id.duracaoEditText);
-        EditText intervaloEditText = findViewById(R.id.intervaloEditText);
 
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Medicamento medicamento = new Medicamento();
 
-                medicamento.setNome(nomeEditText.getText().toString());
-                medicamento.setDuracaoEmDias(duracaoEditText.getText().toString());
-                medicamento.setIntervaloEmHoras(intervaloEditText.getText().toString());
+                String nome = nomeEditText.getText().toString();
+                String dosagem = dosagemEditText.getText().toString();
+                String duracao = duracaoEditText.getText().toString();
+                String intervalo = intervaloEditText.getText().toString();
 
-                DataHolder.insere(medicamento);
+                Medicamento medicamento = new Medicamento(nome,dosagem);
+
+                DataHolder.adicionarMedicamento(medicamento);
+
+                // Limpe os campos do formulário
+                nomeEditText.setText("");
+                dosagemEditText.setText("");
+                duracaoEditText.setText("");
+                intervaloEditText.setText("");
+
 
                 Intent intent = new Intent(RegistrarMedicamentoActivity.this, ListarMedicamentosActivity.class);
                 startActivity(intent);

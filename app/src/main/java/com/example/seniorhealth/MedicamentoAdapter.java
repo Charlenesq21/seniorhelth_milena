@@ -29,6 +29,7 @@ public class MedicamentoAdapter extends ArrayAdapter<Medicamento> {
 
         TextView textViewNome = convertView.findViewById(R.id.textViewNome);
         TextView textViewDosagem = convertView.findViewById(R.id.textViewDosagem);
+ 
 
         // Configure os textViews com os dados do medicamento
         textViewNome.setText(medicamento.getNome());
