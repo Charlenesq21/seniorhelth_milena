@@ -1,5 +1,17 @@
 package com.example.seniorhealth;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.TimePicker;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
+import com.google.android.material.button.MaterialButton;
+
 /*
 import android.content.Intent;
 import android.os.Bundle;
@@ -53,3 +65,46 @@ public class RegistrarMedicamentoActivity extends AppCompatActivity {
     }
 }
 */
+public class RegistrarMedicamentoActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_registrar_medicamento);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
+        DatePicker dataInicial = findViewById(R.id.dataInicial);
+        TimePicker horaInicial = findViewById(R.id.horaInicial);
+        MaterialButton addButton = findViewById(R.id.addButton);
+
+        EditText nomeEditText = findViewById(R.id.nomeEditText);
+        EditText duracaoEditText = findViewById(R.id.duracaoEditText);
+        EditText intervaloEditText = findViewById(R.id.intervaloEditText);
+
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Medicamento medicamento = new Medicamento();
+
+                medicamento.setNome(nomeEditText.getText().toString());
+                medicamento.setDuracaoEmDias(duracaoEditText.getText().toString());
+                medicamento.setIntervaloEmHoras(intervaloEditText.getText().toString());
+
+                Intent intent = new Intent(RegistrarMedicamentoActivity.this, ListarMedicamentosActivity.class);
+                intent.putExtra("NOVO_MEDICAMENTO", (CharSequence) medicamento);
+                startActivity(intent);
+            }
+        });
+    }
+}

@@ -38,8 +38,7 @@
             android:layout_height="wrap_content"
             android:text="Salvar Medicamento" />
 
-    </LinearLayout>
--->
+    </LinearLayout> -->
 
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
@@ -48,7 +47,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.ui.MainActivity">
+    tools:context="com.example.seniorhealth.RegistrarMedicamentoActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
